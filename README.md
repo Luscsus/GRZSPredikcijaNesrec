@@ -65,7 +65,7 @@ Po tem koraku ostane približno **4825** vrstic.
 
 ---
 
-# Nadgradnja značilnic: novice, lokacija, vreme
+## Iskanje več podatkov (lokacija, vreme)
 
 Za boljše modele potrebujemo več konteksta, predvsem:
 - **lokacijo** (kje se je nesreča zgodila),
@@ -114,6 +114,9 @@ npm install
 python -m pip install -r requirements.txt
 npm start
 ```
+- pognati bo treba tudi GRZS.ipynb in sicer Klasifikacija/Predikcija nesreče glede na okoliščine (prej bo potreba pognati še importe, in mogoče pod Čiščenje in priprava dataseta pognati še celico, ki ustvari funkcijo za geokodiranje), in ustvariti model.joblib,
+  ta model potem dajte pod webapp/backend/
+  
 - odprite frontend/index.html
 
 
