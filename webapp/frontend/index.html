@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napovedovalec varnosti v gorah</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Napovedovalec varnosti v gorah</h1>
+        
+        <div class="form-group">
+            <label for="activity">Vrsta dejavnosti:</label>
+            <select id="activity">
+                <option value="alpsko smučanje">Alpsko smučanje</option>
+                <option value="druge športne in rekreacijske aktivnosti">Druge športne in rekreacijske aktivnosti</option>
+                <option value="gorsko kolesarjenje">Gorsko kolesarjenje</option>
+                <option value="planinstvo - brezpotje">Planinstvo - brezpotje</option>
+                <option value="planinstvo - hoja po poti">Planinstvo - hoja po poti</option>
+                <option value="plezanje">Plezanje</option>
+                <option value="turno smučanje">Turno smučanje</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="experience">Izkušenost:</label>
+            <select id="experience">
+                <option value="drugo">Drugo</option>
+                <option value="gorski vodnik">Gorski vodnik</option>
+                <option value="mladinski vodnik">Mladinski vodnik</option>
+                <option value="planinec nečlan PD">Planinec nečlan PD</option>
+                <option value="planinec-član PD">Planinec-član PD</option>
+                <option value="planinski vodnik">Planinski vodnik</option>
+                <option value="reševalec">Reševalec</option>
+                <option value="turist">Turist</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Datum:</label>
+            <input type="date" id="date">
+        </div>
+
+        <div class="form-group">
+            <label>Izberi lokacijo:</label>
+            <div id="map"></div>
+            <p>Izbrano: <span id="location-display">Nič</span></p>
+        </div>
+
+        <button id="check-btn">Preveri varnost</button>
+
+        <div id="result" class="hidden">
+            <h2>Napoved: <span id="prediction-text"></span></h2>
+            <div id="weather-info"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

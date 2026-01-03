@@ -480,13 +480,13 @@ class FacebookScraperPlaywright:
         # Remove duplicates
         user_posts = self.remove_duplicates(user_posts)
         
-        print(f"\n✓ Total unique posts extracted for {username}: {len(user_posts)}")
+        print(f"\nTotal unique posts extracted for {username}: {len(user_posts)}")
         
         return user_posts
 
     def save_to_excel(self, posts, username):
         if not posts:
-            print(f"⚠ No posts found for {username}. Skipping Excel generation.")
+            print(f"No posts found for {username}. Skipping Excel generation.")
             return
 
         filename = f"facebook_posts_{username}.xlsx"
@@ -686,24 +686,24 @@ if __name__ == "__main__":
                 # Save to Excel
                 scraper.save_to_excel(posts, username)
                 
-                print(f"\n✓ Completed scraping for {username}!")
+                print(f"\nCompleted scraping for {username}!")
             
             print("\n" + "="*60)
-            print("✓ PHASE 2 COMPLETE: All posts extracted and saved!")
+            print("PHASE 2 COMPLETE: All posts extracted and saved!")
             print("="*60)
 
         # Final summary
         if run_phase1 and run_phase2:
             print("\n" + "="*60)
-            print("✓ ALL PHASES COMPLETE: All users scraped successfully!")
+            print("ALL PHASES COMPLETE: All users scraped successfully!")
             print("="*60)
         elif run_phase1:
-            print("\n✓ Phase 1 completed. Run with option 2 to extract post content.")
+            print("\nPhase 1 completed. Run with option 2 to extract post content.")
         elif run_phase2:
-            print("\n✓ Phase 2 completed. All post content extracted.")
+            print("\nPhase 2 completed. All post content extracted.")
 
     except Exception as e:
-        print(f"\n✗ Error occurred: {e}")
+        print(f"\nError occurred: {e}")
         import traceback
         traceback.print_exc()
         

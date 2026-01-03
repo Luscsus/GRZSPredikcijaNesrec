@@ -83,8 +83,6 @@ def scrape_post(url):
                 else:
                     date_text = time_tag.get_text(strip=True)
         
-        # Extract Content
-        # We want to get text from the article, but exclude title, meta, and footer links
         content_parts = []
         
         # Iterate over children of article

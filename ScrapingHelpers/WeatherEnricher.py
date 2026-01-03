@@ -11,7 +11,7 @@ load_dotenv()
 
 # Configuration
 INPUT_DIR = 'matched_results'
-OUTPUT_DIR = 'matched_results_weather'  # Optional: save to a new directory to avoid overwriting immediately
+OUTPUT_DIR = 'matched_results_weather'  
 GEOCODING_URL = "https://api.geoapify.com/v1/geocode/search"
 WEATHER_URL = "https://archive-api.open-meteo.com/v1/archive"
 GEOAPIFY_API_KEY = os.getenv("GEOAPIFY_API_KEY")
@@ -23,7 +23,7 @@ def get_coordinates(location_name):
     if not location_name or pd.isna(location_name):
         return None, None
     
-    # Clean location name (sometimes it might have extra info)
+    # Clean location name 
     location_query = str(location_name).split(',')[0].strip()
     
     if location_query in location_cache:
@@ -97,7 +97,6 @@ def get_weather_history(lat, lon, date_obj):
         
         result = {}
         
-        # Helper to safely get value
         def get_val(d_str, key):
             if d_str in weather_map and weather_map[d_str][key] is not None:
                 return weather_map[d_str][key]
@@ -123,7 +122,6 @@ def get_weather_history(lat, lon, date_obj):
         return {}
 
 def process_files():
-    # Create output directory if it doesn't exist
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
 
@@ -134,12 +132,10 @@ def process_files():
         try:
             df = pd.read_excel(file_path)
             
-            # Check if required columns exist
             if "Datum" not in df.columns:
                 print(f"Skipping {file_path}: 'Datum' column not found.")
                 continue
             
-            # Determine location column
             loc_col = "Lokacija"
             if "Lokacija" not in df.columns:
                 if "location" in df.columns:
@@ -150,7 +146,6 @@ def process_files():
             
             print(f"Using '{loc_col}' for location data.")
 
-            # Prepare new columns
             new_columns = [
                 "Temp_tisti_dan", "Temp_prejsni_dan", "Temp_preprejsni_dan",
                 "Kolicina_dezja_tisti_dan", "Kolicina_dezja_prejsni_dan", "Kolicina_dezja_preprejsni_dan",
@@ -161,8 +156,6 @@ def process_files():
                 if col not in df.columns:
                     df[col] = None
 
-            # Iterate and fetch data
-            # Using iterrows is slow but simple. For API calls, the bottleneck is the network anyway.
             for index, row in df.iterrows():
                 date_val = row["Datum"]
                 location_val = row[loc_col]
@@ -170,7 +163,6 @@ def process_files():
                 if pd.isna(date_val) or pd.isna(location_val):
                     continue
                 
-                # Ensure date is datetime object
                 if not isinstance(date_val, datetime):
                     try:
                         date_val = pd.to_datetime(date_val)
@@ -187,7 +179,6 @@ def process_files():
                 # Fetch Weather
                 weather_data = get_weather_history(lat, lon, date_val)
                 
-                # Update DataFrame
                 for key, val in weather_data.items():
                     if key in df.columns:
                         df.at[index, key] = val
